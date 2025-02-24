@@ -3,12 +3,12 @@
 #include "Actor/DrawableActor.h"
 #include "Math/Vector2.h"
 
-class Start : public DrawableActor
+class End : public DrawableActor
 {
-	RTTI_DECLARATIONS(Start, DrawableActor)
+	RTTI_DECLARATIONS(End, DrawableActor)
 
 public:
-	Start();
+	End();
 
 	virtual void Update(float deltaTime) override;
 

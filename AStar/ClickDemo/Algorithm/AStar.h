@@ -15,7 +15,7 @@ private:
 		int x;
 		int y;
 
-		// 이동 비용
+		// 이동 비용.
 		float cost;
 	};
 

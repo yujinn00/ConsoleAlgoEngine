@@ -1,8 +1,8 @@
+#include <iostream>
+
 #include "AStar.h"
 #include "Node.h"
 #include "Math/Vector2.h"
-
-#include <iostream>
 
 AStar::AStar()
 	: startNode(nullptr), goalNode(nullptr)
@@ -33,7 +33,7 @@ std::vector<Node*> AStar::FindPath(Node* startNode, Node* goalNode, const std::v
 	// 시작 노드를 열린 리스트(OpenList)에 추가.
 	openList.emplace_back(startNode);
 
-	// 상하좌우 및 대각선 이동 방향과 비용
+	// 상하좌우 및 대각선 이동 방향과 비용.
 	std::vector<Direction> directions =
 	{
 		// 하상우좌 이동.
@@ -94,7 +94,7 @@ std::vector<Node*> AStar::FindPath(Node* startNode, Node* goalNode, const std::v
 
 		closedList.emplace_back(currentNode);
 
-		// 이웃 노드 방문(탐색). (하/상/우/좌 차례로 방문).
+		// 이웃 노드 탐색. (하상우좌 차례로 탐색).
 		for (const Direction& direction : directions)
 		{
 			// 다음에 이동할 위치 설정.

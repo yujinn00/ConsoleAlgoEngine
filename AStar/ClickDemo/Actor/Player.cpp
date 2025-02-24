@@ -1,23 +1,19 @@
 #include "Player.h"
 #include "Engine/Engine.h"
+#include "Algorithm/AStar.h"
 
 Player::Player()
-	: DrawableActor("e")
+	: DrawableActor("P")
 {
-	color = Color::Green;
-	position = Vector2(5, 5);
+	color = Color::Cyan;
+	position = Vector2(19, 12);
 }
 
 void Player::Update(float deltaTime)
 {
-	DrawableActor::Update(deltaTime);
+	Super::Update(deltaTime);
 
-	if (Engine::Get().GetKeyDown(VK_ESCAPE))
-	{
-		Engine::Get().QuitGame();
-	}
-
-	if (Engine::Get().GetKeyDown(VK_RBUTTON))
+	if (Engine::Get().GetKeyDown(VK_RETURN))
 	{
 		position = Engine::Get().MousePosition();
 	}

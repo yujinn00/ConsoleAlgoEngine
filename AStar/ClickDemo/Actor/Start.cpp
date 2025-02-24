@@ -2,9 +2,10 @@
 #include "Engine/Engine.h"
 
 Start::Start()
-	: DrawableActor("s")
+	: DrawableActor("S")
 {
 	color = Color::Red;
+	position = Vector2(5, 3);
 }
 
 void Start::Update(float deltaTime)
