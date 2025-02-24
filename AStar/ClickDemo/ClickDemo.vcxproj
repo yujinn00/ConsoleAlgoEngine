@@ -185,7 +185,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor\End.cpp" />
-    <ClCompile Include="Actor\Player.cpp" />
     <ClCompile Include="Actor\Start.cpp" />
     <ClCompile Include="Algorithm\AStar.cpp" />
     <ClCompile Include="Level\DemoLevel.cpp" />
@@ -193,7 +192,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor\End.h" />
-    <ClInclude Include="Actor\Player.h" />
     <ClInclude Include="Actor\Start.h" />
     <ClInclude Include="Algorithm\AStar.h" />
     <ClInclude Include="Level\DemoLevel.h" />

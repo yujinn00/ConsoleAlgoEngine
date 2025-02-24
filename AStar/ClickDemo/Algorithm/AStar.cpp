@@ -155,6 +155,41 @@ std::vector<Node*> AStar::FindPath(Node* startNode, Node* goalNode, const std::v
 	return {};
 }
 
+void AStar::DisplayGridWithPath(std::vector<std::vector<int>>& grid, const std::vector<Node*>& path)
+{
+	for (const Node* node : path)
+	{
+		// 경로는 '2'로 표시.
+		grid[node->position.y][node->position.x] = 2;
+	}
+
+	for (int y = 0; y < grid.size(); ++y)
+	{
+		for (int x = 0; x < grid[0].size(); ++x)
+		{
+			// 장애물.
+			if (grid[y][x] == 1)
+			{
+				std::cout << "1 ";
+			}
+
+			// 경로.
+			else if (grid[y][x] == 2)
+			{
+				std::cout << "* ";
+			}
+
+			// 빈 공간.
+			else if (grid[y][x] == 0)
+			{
+				std::cout << "0 ";
+			}
+		}
+
+		std::cout << "\n";
+	}
+}
+
 std::vector<Node*> AStar::ConstructPath(Node* goalNode)
 {
 	// 목표 노드 부터, 부모 노드를 따라 역추적하면서 경로 노드 설정.
@@ -242,37 +277,3 @@ bool AStar::IsDestination(Node* node)
 	return *node == *goalNode;
 }
 
-void AStar::DisplayGridWithPath(std::vector<std::vector<int>>& grid, const std::vector<Node*>& path)
-{
-	for (const Node* node : path)
-	{
-		// 경로는 '2'로 표시.
-		grid[node->position.y][node->position.x] = 2;
-	}
-
-	for (int y = 0; y < grid.size(); ++y)
-	{
-		for (int x = 0; x < grid[0].size(); ++x)
-		{
-			// 장애물.
-			if (grid[y][x] == 1)
-			{
-				std::cout << "1 ";
-			}
-
-			// 경로.
-			else if (grid[y][x] == 2)
-			{
-				std::cout << "* ";
-			}
-
-			// 빈 공간.
-			else if (grid[y][x] == 0)
-			{
-				std::cout << "0 ";
-			}
-		}
-
-		std::cout << "\n";
-	}
-}

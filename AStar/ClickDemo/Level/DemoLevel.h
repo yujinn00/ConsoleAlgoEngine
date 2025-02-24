@@ -3,7 +3,6 @@
 #include <vector>
 
 #include "Level/Level.h"
-#include "Actor/Player.h"
 #include "Actor/Start.h"
 #include "Actor/End.h"
 
@@ -25,7 +24,6 @@ public:
 	void DrawMap();
 
 private:
-	Player* player = nullptr;
 	Start* start = nullptr;
 	End* end = nullptr;
 
