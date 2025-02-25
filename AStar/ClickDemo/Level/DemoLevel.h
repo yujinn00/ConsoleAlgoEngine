@@ -24,11 +24,11 @@ public:
 	void DrawMap();
 
 	// Getter.
-	Start* GetStart() const;
-	End* GetEnd() const;
-	std::vector<std::vector<char>>& GetMap();
-	int GetMapWidth() const;
-	int GetMapHeight() const;
+	inline Start* GetStart() const { return this->start; }
+	inline End* GetEnd() const { return this->end; }
+	inline std::vector<std::vector<char>>& GetMap() { return this->map; }
+	inline int GetMapWidth() const { return this->mapWidth; }
+	inline int GetMapHeight() const { return this->mapHeight; }
 
 private:
 	Start* start = nullptr;

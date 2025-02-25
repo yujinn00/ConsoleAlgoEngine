@@ -167,28 +167,3 @@ void DemoLevel::DrawMap()
 	// End 위치 출력.
 	Engine::Get().Draw(Vector2(end->GetPosition().x, end->GetPosition().y), "E", Color::Red);
 }
-
-Start* DemoLevel::GetStart() const
-{
-	return this->start ? this->start : nullptr;
-}
-
-End* DemoLevel::GetEnd() const
-{
-	return this->end ? this->end : nullptr;
-}
-
-std::vector<std::vector<char>>& DemoLevel::GetMap()
-{
-	return this->map;
-}
-
-int DemoLevel::GetMapWidth() const
-{
-	return this->mapWidth;
-}
-
-int DemoLevel::GetMapHeight() const
-{
-	return this->mapHeight;
-}
