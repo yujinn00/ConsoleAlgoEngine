@@ -1,9 +1,8 @@
-#include "Engine/Engine.h"
-#include "Level/DemoLevel.h"
+#include "Game/Game.h"
 
 int main()
 {
-	Engine engine;
-	engine.LoadLevel(new DemoLevel());
-	engine.Run();
+	Game game;
+	game.LoadLevel(game.LoadDemoLevel());
+	game.Run();
 }

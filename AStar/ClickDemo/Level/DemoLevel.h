@@ -23,6 +23,13 @@ public:
 	// ÆÄ½ÌÇÑ ¸ÊÀ» Ãâ·Â.
 	void DrawMap();
 
+	// Getter.
+	Start* GetStart() const;
+	End* GetEnd() const;
+	std::vector<std::vector<char>>& GetMap();
+	int GetMapWidth() const;
+	int GetMapHeight() const;
+
 private:
 	Start* start = nullptr;
 	End* end = nullptr;

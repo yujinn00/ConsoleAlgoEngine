@@ -2,6 +2,7 @@
 
 #include "AStar.h"
 #include "Node.h"
+#include "Engine/Engine.h"
 #include "Math/Vector2.h"
 
 AStar::AStar()
@@ -25,7 +26,7 @@ AStar::~AStar()
 	closedList.clear();
 }
 
-std::vector<Node*> AStar::FindPath(Node* startNode, Node* goalNode, const std::vector<std::vector<int>>& grid)
+std::vector<Node*> AStar::FindPath(Node* startNode, Node* goalNode, const std::vector<std::vector<char>>& grid)
 {
 	this->startNode = startNode;
 	this->goalNode = goalNode;
@@ -108,7 +109,7 @@ std::vector<Node*> AStar::FindPath(Node* startNode, Node* goalNode, const std::v
 			}
 
 			// 이동할 위치가 장애물인 경우에는 무시.
-			if (grid[newY][newX] == 1)
+			if (grid[newY][newX] == '#')
 			{
 				continue;
 			}
@@ -155,38 +156,44 @@ std::vector<Node*> AStar::FindPath(Node* startNode, Node* goalNode, const std::v
 	return {};
 }
 
-void AStar::DisplayGridWithPath(std::vector<std::vector<int>>& grid, const std::vector<Node*>& path)
+void AStar::DisplayGridWithPath(std::vector<std::vector<char>>& grid, const std::vector<Node*>& path, int pathIndex)
 {
-	for (const Node* node : path)
+	// 예외 처리.
+	if (path.empty())
 	{
-		// 경로는 '2'로 표시.
-		grid[node->position.y][node->position.x] = 2;
+		return;
+	}
+
+	// 현재 pathIndex까지의 경로만 '@'로 표시.
+	for (int i = 0; i < pathIndex && i < path.size(); ++i)
+	{
+		// 예외 처리.
+		if (!path[i])
+		{
+			continue;
+		}
+
+		int y = path[i]->position.y;
+		int x = path[i]->position.x;
+
+		// 경로는 '@'로 표시.
+		if (y >= 0 && y < grid.size() && x >= 0 && x < grid[0].size())
+		{
+			grid[y][x] = '@';
+		}
 	}
 
 	for (int y = 0; y < grid.size(); ++y)
 	{
 		for (int x = 0; x < grid[0].size(); ++x)
 		{
-			// 장애물.
-			if (grid[y][x] == 1)
-			{
-				std::cout << "1 ";
-			}
-
-			// 경로.
-			else if (grid[y][x] == 2)
-			{
-				std::cout << "* ";
-			}
-
-			// 빈 공간.
-			else if (grid[y][x] == 0)
-			{
-				std::cout << "0 ";
-			}
+			if (grid[y][x] == '#')
+				Engine::Get().Draw(Vector2(x, y), "#", Color::White);
+			else if (grid[y][x] == '@')
+				Engine::Get().Draw(Vector2(x, y), "@", Color::Yellow);
+			else
+				Engine::Get().Draw(Vector2(x, y), " ", Color::White);
 		}
-
-		std::cout << "\n";
 	}
 }
 
@@ -195,9 +202,10 @@ std::vector<Node*> AStar::ConstructPath(Node* goalNode)
 	// 목표 노드 부터, 부모 노드를 따라 역추적하면서 경로 노드 설정.
 	std::vector<Node*> path;
 	Node* currentNode = goalNode;
+
 	while (currentNode != nullptr)
 	{
-		path.emplace_back(currentNode);
+		path.emplace_back(new Node(*currentNode));
 		currentNode = currentNode->parent;
 	}
 
@@ -212,7 +220,7 @@ float AStar::CalculateHeuristic(Node* currentNode, Node* goalNode)
 	return static_cast<float>(std::sqrt(std::pow(diff.x, 2) + std::pow(diff.y, 2)));
 }
 
-bool AStar::IsInRange(int x, int y, const std::vector<std::vector<int>>& grid)
+bool AStar::IsInRange(int x, int y, const std::vector<std::vector<char>>& grid)
 {
 	// x, y 범위가 벗어나면 false 반환.
 	if (x < 0 || x >= grid[0].size() || y < 0 || y >= grid.size())
@@ -233,7 +241,7 @@ bool AStar::HasVisited(int x, int y, float gCost)
 		if ((node->position.x == x && node->position.y == y))
 		{
 			// 위치가 같고, 비용이 더 크면 방문할 이유가 없기 때문에 방문했다고 판단.
-			if (gCost > node->gCost)
+			if (gCost >= node->gCost)
 			{
 				return true;
 			}
@@ -253,7 +261,7 @@ bool AStar::HasVisited(int x, int y, float gCost)
 		if ((node->position.x == x && node->position.y == y))
 		{
 			// 위치가 같고, 비용이 더 크면 방문할 이유가 없기 때문에 방문했다고 판단.
-			if (gCost > node->gCost)
+			if (gCost >= node->gCost)
 			{
 				return true;
 			}
@@ -276,4 +284,3 @@ bool AStar::IsDestination(Node* node)
 	// 노드의 위치가 서로 같은지 비교.
 	return *node == *goalNode;
 }
-

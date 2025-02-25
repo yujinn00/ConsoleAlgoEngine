@@ -2,11 +2,10 @@
 #include <string>
 
 #include "DemoLevel.h"
+#include "Game/Game.h"
 #include "Actor/Start.h"
 #include "Actor/End.h"
 #include "Engine/Engine.h"
-#include "Algorithm/Node.h"
-#include "Algorithm/AStar.h"
 
 DemoLevel::DemoLevel()
 	: start(new Start()), end(new End())
@@ -32,7 +31,7 @@ void DemoLevel::Update(float deltaTime)
 
 	if (Engine::Get().GetKeyDown(VK_RETURN))
 	{
-		// @Todo: 로직
+		Game::Get().ToggleLevel("Print Level");
 	}
 }
 
@@ -167,4 +166,29 @@ void DemoLevel::DrawMap()
 
 	// End 위치 출력.
 	Engine::Get().Draw(Vector2(end->GetPosition().x, end->GetPosition().y), "E", Color::Red);
+}
+
+Start* DemoLevel::GetStart() const
+{
+	return this->start ? this->start : nullptr;
+}
+
+End* DemoLevel::GetEnd() const
+{
+	return this->end ? this->end : nullptr;
+}
+
+std::vector<std::vector<char>>& DemoLevel::GetMap()
+{
+	return this->map;
+}
+
+int DemoLevel::GetMapWidth() const
+{
+	return this->mapWidth;
+}
+
+int DemoLevel::GetMapHeight() const
+{
+	return this->mapHeight;
 }
