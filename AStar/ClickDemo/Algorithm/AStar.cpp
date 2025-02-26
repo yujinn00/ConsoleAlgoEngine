@@ -161,16 +161,17 @@ void AStar::DisplayGridWithPath(std::vector<std::vector<char>>& grid, const std:
 	// 예외 처리.
 	if (path.size() <= 2)
 	{
+		std::cout << "사이즈가 2 이하입니다.\n";
 		return;
 	}
 
-	// 첫 번째와 마지막 노드 위치 가져오기
+	// 첫 번째와 마지막 노드 위치 가져오기.
 	int startY = path.front()->position.y;
 	int startX = path.front()->position.x;
 	int endY = path.back()->position.y;
 	int endX = path.back()->position.x;
 
-	// 현재 pathIndex까지의 경로만 '@'로 표시 (첫 번째와 마지막 제외)
+	// 현재 pathIndex까지의 경로만 '@'로 표시 (첫 번째와 마지막 제외).
 	for (int i = 1; i < pathIndex - 1 && i < path.size() - 1; ++i)
 	{
 		// 예외 처리.
@@ -182,7 +183,7 @@ void AStar::DisplayGridWithPath(std::vector<std::vector<char>>& grid, const std:
 		int y = path[i]->position.y;
 		int x = path[i]->position.x;
 
-		// 경로는 '@'로 표시 (범위 체크)
+		// 경로는 '@'로 표시 (범위 체크).
 		if (y >= 0 && y < grid.size() && x >= 0 && x < grid[0].size())
 		{
 			grid[y][x] = '@';

@@ -10,7 +10,7 @@
 DemoLevel::DemoLevel()
 	: start(new Start(*this)), end(new End(*this))
 {
-	// ¸Ê ·Îµå
+	// ¸Ê ·Îµå.
 	if (!ParseMap("../Assets/AStarMap.txt"))
 	{
 		std::cerr << "¸Ê ·Îµù¿¡ ½ÇÆÐÇß½À´Ï´Ù.\n";

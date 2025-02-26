@@ -41,6 +41,6 @@ private:
 	// 경과 시간 누적 변수.
 	float elapsedTime = 0.0f;
 
-	// 0.2초마다 한 칸씩 출력.
-	float drawInterval = 0.2f;
+	// 0.1초마다 한 칸씩 출력.
+	float drawInterval = 0.1f;
 };

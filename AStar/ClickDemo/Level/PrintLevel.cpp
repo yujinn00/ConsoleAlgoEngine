@@ -56,10 +56,12 @@ void PrintLevel::Draw()
 
 void PrintLevel::DrawPath()
 {
-	if (isPathDrawn) return; // 이미 탐색되었으면 실행하지 않음.
+	// 이미 탐색되었으면 실행하지 않음.
+	if (isPathDrawn) return;
 
 	if (!demoLevel.GetStart() || !demoLevel.GetEnd())
 	{
+		std::cout << "스타트나 엔드가 없습니다.\n";
 		return;
 	}
 
@@ -93,7 +95,6 @@ void PrintLevel::ResetPath()
 			if (map[y][x] == '@') // 경로 표시된 부분만 초기화.
 			{
 				map[y][x] = ' '; // 빈 공간으로 변경.
-				std::cout << map[y][x] << " ";
 			}
 		}
 	}

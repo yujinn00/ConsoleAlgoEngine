@@ -29,7 +29,7 @@ Level* Game::LoadDemoLevel()
 
 void Game::ToggleLevel(const char* text)
 {
-	system("cls");
+	ClearImageBuffer();
 
 	if (text == "Demo Level")
 	{
