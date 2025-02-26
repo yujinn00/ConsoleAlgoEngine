@@ -173,7 +173,6 @@ void AStar::DisplayGridWithPath(std::vector<std::vector<char>>& grid, const std:
 	// 예외 처리.
 	if (path.size() <= 2)
 	{
-		std::cout << "사이즈가 2 이하입니다.\n";
 		return;
 	}
 
@@ -184,7 +183,7 @@ void AStar::DisplayGridWithPath(std::vector<std::vector<char>>& grid, const std:
 	int endX = path.back()->position.x;
 
 	// 현재 pathIndex까지의 경로만 '@'로 표시 (첫 번째와 마지막 제외).
-	for (int i = 1; i < pathIndex - 1 && i < path.size() - 1; ++i)
+	for (int i = 1; i < pathIndex && i < path.size(); ++i)
 	{
 		// 예외 처리.
 		if (!path[i])

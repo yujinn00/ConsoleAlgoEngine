@@ -27,6 +27,19 @@ void End::Update(float deltaTime)
 		}
 		position = endPosition;
 
-		//Game::Get().ToggleLevel("Print Level");
+		// 맵에 표시된 '@' 초기화.
+		std::vector<std::vector<char>>& map = demoLevel.GetMap();
+		for (int y = 0; y < map.size(); ++y)
+		{
+			for (int x = 0; x < map[y].size(); ++x)
+			{
+				if (map[y][x] == '@') // 경로 표시된 부분만 초기화.
+				{
+					map[y][x] = ' '; // 빈 공간으로 변경.
+				}
+			}
+		}
+
+		Game::Get().ToggleLevel("Print Level");
 	}
 }

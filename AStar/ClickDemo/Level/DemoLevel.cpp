@@ -28,11 +28,6 @@ void DemoLevel::Update(float deltaTime)
 	{
 		Engine::Get().QuitGame();
 	}
-
-	if (Engine::Get().GetKeyDown(VK_RETURN))
-	{
-		Game::Get().ToggleLevel("Print Level");
-	}
 }
 
 void DemoLevel::Draw()
@@ -157,7 +152,16 @@ void DemoLevel::DrawMap()
 	{
 		for (int x = 0; x < map[y].size(); ++x)
 		{
-			Engine::Get().Draw(Vector2(offsetX + x, offsetY + y), std::string(1, map[y][x]).c_str(), Color::White);
+			// 기본 색상 설정.
+			Color drawColor = Color::White;
+
+			// '@' 문자는 노란색으로 변경.
+			if (map[y][x] == '@')
+			{
+				drawColor = Color::Yellow;
+			}
+
+			Engine::Get().Draw(Vector2(offsetX + x, offsetY + y), std::string(1, map[y][x]).c_str(), drawColor);
 		}
 	}
 

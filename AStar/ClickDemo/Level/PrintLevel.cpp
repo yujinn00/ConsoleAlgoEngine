@@ -17,12 +17,6 @@ void PrintLevel::Update(float deltaTime)
 		Engine::Get().QuitGame();
 	}
 
-	if (Engine::Get().GetKeyDown(VK_RETURN))
-	{
-		ResetPath();
-		Game::Get().ToggleLevel("Demo Level");
-	}
-
 	// 경로가 탐색되었고, 아직 끝까지 도달하지 않았다면 실행.
 	if (isPathDrawn && pathIndex < path.size())
 	{
@@ -34,6 +28,13 @@ void PrintLevel::Update(float deltaTime)
 			elapsedTime = 0.0f; // 시간 초기화.
 			pathIndex++; // 한 칸씩 진행.
 		}
+	}
+
+	// 경로 출력이 끝나면 자동으로 DemoLevel로 전환.
+	if (isPathDrawn && pathIndex >= path.size())
+	{
+		ResetPath(); // 기존 경로 초기화.
+		Game::Get().ToggleLevel("Demo Level"); // 자동으로 DemoLevel로 전환.
 	}
 }
 
@@ -61,7 +62,6 @@ void PrintLevel::SavePath()
 
 	if (!demoLevel.GetStart() || !demoLevel.GetEnd())
 	{
-		std::cout << "스타트나 엔드가 없습니다.\n";
 		return;
 	}
 
@@ -85,17 +85,4 @@ void PrintLevel::ResetPath()
 	path.clear();
 	pathIndex = 0;
 	isPathDrawn = false;
-
-	// 맵에 표시된 '@' 초기화.
-	std::vector<std::vector<char>>& map = demoLevel.GetMap();
-	for (int y = 0; y < map.size(); ++y)
-	{
-		for (int x = 0; x < map[y].size(); ++x)
-		{
-			if (map[y][x] == '@') // 경로 표시된 부분만 초기화.
-			{
-				map[y][x] = ' '; // 빈 공간으로 변경.
-			}
-		}
-	}
 }
