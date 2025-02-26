@@ -159,13 +159,19 @@ std::vector<Node*> AStar::FindPath(Node* startNode, Node* goalNode, const std::v
 void AStar::DisplayGridWithPath(std::vector<std::vector<char>>& grid, const std::vector<Node*>& path, int pathIndex)
 {
 	// 예외 처리.
-	if (path.empty())
+	if (path.size() <= 2)
 	{
 		return;
 	}
 
-	// 현재 pathIndex까지의 경로만 '@'로 표시.
-	for (int i = 0; i < pathIndex && i < path.size(); ++i)
+	// 첫 번째와 마지막 노드 위치 가져오기
+	int startY = path.front()->position.y;
+	int startX = path.front()->position.x;
+	int endY = path.back()->position.y;
+	int endX = path.back()->position.x;
+
+	// 현재 pathIndex까지의 경로만 '@'로 표시 (첫 번째와 마지막 제외)
+	for (int i = 1; i < pathIndex - 1 && i < path.size() - 1; ++i)
 	{
 		// 예외 처리.
 		if (!path[i])
@@ -176,7 +182,7 @@ void AStar::DisplayGridWithPath(std::vector<std::vector<char>>& grid, const std:
 		int y = path[i]->position.y;
 		int x = path[i]->position.x;
 
-		// 경로는 '@'로 표시.
+		// 경로는 '@'로 표시 (범위 체크)
 		if (y >= 0 && y < grid.size() && x >= 0 && x < grid[0].size())
 		{
 			grid[y][x] = '@';
@@ -187,7 +193,11 @@ void AStar::DisplayGridWithPath(std::vector<std::vector<char>>& grid, const std:
 	{
 		for (int x = 0; x < grid[0].size(); ++x)
 		{
-			if (grid[y][x] == '#')
+			if (y == startY && x == startX)
+				Engine::Get().Draw(Vector2(x, y), "S", Color::Green);
+			else if (y == endY && x == endX)
+				Engine::Get().Draw(Vector2(x, y), "E", Color::Red);
+			else if (grid[y][x] == '#')
 				Engine::Get().Draw(Vector2(x, y), "#", Color::White);
 			else if (grid[y][x] == '@')
 				Engine::Get().Draw(Vector2(x, y), "@", Color::Yellow);

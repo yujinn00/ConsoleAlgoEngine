@@ -1,8 +1,9 @@
 #include "Start.h"
 #include "Engine/Engine.h"
+#include "Level/DemoLevel.h"
 
-Start::Start()
-	: DrawableActor("S")
+Start::Start(DemoLevel& demoLevel)
+	: DrawableActor("S"), demoLevel(demoLevel)
 {
 	color = Color::Red;
 	position = Vector2(5, 3);
@@ -14,6 +15,15 @@ void Start::Update(float deltaTime)
 
 	if (Engine::Get().GetKeyDown(VK_LBUTTON))
 	{
-		position = Engine::Get().MousePosition();
+		Vector2 startPosition = Engine::Get().MousePosition();
+		if (startPosition.x < 1 || startPosition.x > demoLevel.GetMapWidth() - 2 || startPosition.y < 1 || startPosition.y > demoLevel.GetMapHeight() - 2)
+		{
+			return;
+		}
+		if (demoLevel.GetMap()[startPosition.y][startPosition.x] == '#')
+		{
+			return;
+		}
+		position = startPosition;
 	}
 }

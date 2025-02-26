@@ -59,9 +59,6 @@ public:
 	// 教臂沛 按眉 立辟 窃荐.
 	static Engine& Get();
 
-	// Getter.
-	Level* GetLevel() { return mainLevel; }
-
 protected:
 	void ProcessInput();				// 涝仿 贸府.
 	void Update(float deltaTime);		// Tick();

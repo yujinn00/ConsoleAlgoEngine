@@ -2,6 +2,7 @@
 
 #include "Level/Level.h"
 #include "Algorithm/Node.h"
+#include "Algorithm/AStar.h"
 
 class DemoLevel;
 class PrintLevel : public Level
@@ -19,8 +20,14 @@ public:
 	// 저장한 경로를 출력.
 	void DrawPath();
 
+	// 출력한 경로를 초기화.
+	void ResetPath();
+
 private:
 	DemoLevel& demoLevel;
+
+	// Astar 객체 생성.
+	AStar aStar;
 
 	// A* 경로 저장.
 	std::vector<Node*> path;

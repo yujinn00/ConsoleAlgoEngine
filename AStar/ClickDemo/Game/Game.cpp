@@ -31,7 +31,11 @@ void Game::ToggleLevel(const char* text)
 {
 	system("cls");
 
-	if (text == "Print Level")
+	if (text == "Demo Level")
+	{
+		mainLevel = demoLevel;
+	}
+	else if (text == "Print Level")
 	{
 		mainLevel = printLevel;
 	}

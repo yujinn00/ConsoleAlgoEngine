@@ -8,14 +8,14 @@
 #include "Engine/Engine.h"
 
 DemoLevel::DemoLevel()
-	: start(new Start()), end(new End())
+	: start(new Start(*this)), end(new End(*this))
 {
 	// 맵 로드
 	if (!ParseMap("../Assets/AStarMap.txt"))
 	{
 		std::cerr << "맵 로딩에 실패했습니다.\n";
 	}
-	
+
 	AddActor(start);
 	AddActor(end);
 }
