@@ -31,6 +31,18 @@ std::vector<Node*> AStar::FindPath(Node* startNode, Node* goalNode, const std::v
 	this->startNode = startNode;
 	this->goalNode = goalNode;
 
+	for (Node* node : openList)
+	{
+		SafeDelete(node);
+	}
+	openList.clear();
+
+	for (Node* node : closedList)
+	{
+		SafeDelete(node);
+	}
+	closedList.clear();
+
 	// 시작 노드를 열린 리스트(OpenList)에 추가.
 	openList.emplace_back(startNode);
 

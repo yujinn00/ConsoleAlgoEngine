@@ -18,7 +18,7 @@ public:
 	virtual void Draw() override;
 
 	// 저장한 경로를 출력.
-	void DrawPath();
+	void SavePath();
 
 	// 출력한 경로를 초기화.
 	void ResetPath();

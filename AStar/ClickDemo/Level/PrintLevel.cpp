@@ -44,7 +44,7 @@ void PrintLevel::Draw()
 	// 경로 탐색이 수행되지 않았다면 실행.
 	if (!isPathDrawn)
 	{
-		DrawPath();
+		SavePath();
 	}
 
 	// 탐색이 완료되었다면 경로 출력.
@@ -54,7 +54,7 @@ void PrintLevel::Draw()
 	}
 }
 
-void PrintLevel::DrawPath()
+void PrintLevel::SavePath()
 {
 	// 이미 탐색되었으면 실행하지 않음.
 	if (isPathDrawn) return;

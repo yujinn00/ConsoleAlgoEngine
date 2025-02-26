@@ -1,6 +1,7 @@
 #include "End.h"
 #include "Engine/Engine.h"
 #include "Level/DemoLevel.h"
+#include "Game/Game.h"
 
 End::End(DemoLevel& demoLevel)
 	: DrawableActor("E"), demoLevel(demoLevel)
@@ -25,5 +26,7 @@ void End::Update(float deltaTime)
 			return;
 		}
 		position = endPosition;
+
+		//Game::Get().ToggleLevel("Print Level");
 	}
 }

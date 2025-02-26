@@ -1,6 +1,7 @@
 #include "Start.h"
 #include "Engine/Engine.h"
 #include "Level/DemoLevel.h"
+#include "Game/Game.h"
 
 Start::Start(DemoLevel& demoLevel)
 	: DrawableActor("S"), demoLevel(demoLevel)
@@ -25,5 +26,7 @@ void Start::Update(float deltaTime)
 			return;
 		}
 		position = startPosition;
+
+		//Game::Get().ToggleLevel("Print Level");
 	}
 }
